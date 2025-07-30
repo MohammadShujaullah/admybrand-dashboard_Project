@@ -66,14 +66,11 @@ You added several advanced features during development:
 
 ## 🔗 Live Demo
 
-**Coming Soon on Vercel**
-
----
-
-## 📁 Folder Structure
+https://admybrand-dashboard-project-kupc.vercel.app
 
 
 ---
+ 
 
 ## 🧪 AI Usage Report
 
