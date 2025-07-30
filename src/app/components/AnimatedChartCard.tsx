@@ -14,12 +14,13 @@ export default function AnimatedChartCard({
       opacity: 1,
       y: 0,
       transition: {
-        delay: index * 0.2,
+        delay: 0.1,
         duration: 0.6,
-        ease: 'easeOut',
+        ease: [0.42, 0, 0.58, 1], // ✅ Correct easing format
       },
     },
   };
+
 
   return (
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
