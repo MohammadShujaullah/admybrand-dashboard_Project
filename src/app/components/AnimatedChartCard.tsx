@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface AnimatedChartCardProps {
@@ -8,15 +8,15 @@ interface AnimatedChartCardProps {
   index: number;
 }
 
-const fadeIn = {
+const fadeIn: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.1,       // you can also make this `index * 0.2` if you want staggered effect
+      delay: 0.1,
       duration: 0.6,
-      ease: "easeInOut", // ✅ fix: string, not array
+      ease: "easeInOut",
     },
   },
 };
@@ -26,7 +26,7 @@ export default function AnimatedChartCard({ children }: AnimatedChartCardProps) 
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={fadeIn}
+      variants={fadeIn} // ✅ FIXED here
     >
       {children}
     </motion.div>
