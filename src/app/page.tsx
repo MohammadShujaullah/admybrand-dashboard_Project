@@ -1,103 +1,121 @@
-import Image from "next/image";
+'use client';
 
+import { useEffect, useState } from 'react';
+import { TrendingUp, Users, BarChart3, Activity } from 'lucide-react';
+import MetricCard from '@/app/components/MetricCard';
+import ChartCard from '@/app/components/ChartCard';
+import DataTable from '@/app/components/DataTable';
+import AnimatedMetricCard from '@/app/components/AnimatedMetricCard';
+import AnimatedChartCard from '@/app/components/AnimatedChartCard';
+
+// Real-time Metrics
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [metrics, setMetrics] = useState({
+    revenue: 12000,
+    users: 3500,
+    conversions: 278,
+    growth: 4.8,
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMetrics((prev) => ({
+        revenue: parseFloat((prev.revenue * 1.0001).toFixed(2)),       // +0.01%
+        users: Math.floor(prev.users * 1.001),                        // +0.01%
+        conversions: Math.floor(prev.conversions * 1.01),            // +0.01%
+        growth: parseFloat((prev.growth * 1.01).toFixed(2)),         // +0.01%
+      }));
+    }, 3000); // Every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
+  // Chart 1: Monthly Website Visitors (Line Chart)
+  const visitorsData = [
+    { name: 'Jan', value: 2200 },
+    { name: 'Feb', value: 2800 },
+    { name: 'Mar', value: 3500 },
+    { name: 'Apr', value: 3900 },
+    { name: 'May', value: 4200 },
+    { name: 'Jun', value: 5100 },
+    { name: 'Jul', value: 4800 },
+  ];
+
+  // Chart 2: Conversion Rate by Campaign (Bar Chart)
+  const campaignData = [
+    { name: 'Email', value: 5.4 },
+    { name: 'Google Ads', value: 7.8 },
+    { name: 'Facebook', value: 4.2 },
+    { name: 'LinkedIn', value: 6.5 },
+    { name: 'Instagram', value: 3.9 },
+  ];
+
+  // Chart 3: User Roles (Pie Chart)
+  const userRoleData = [
+    { name: 'Admin', value: 10 },
+    { name: 'Editor', value: 18 },
+    { name: 'Viewer', value: 24 },
+  ];
+
+  return (
+    <main className="p-6 space-y-8">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <AnimatedMetricCard index={0}>
+          <MetricCard
+            title="Revenue"
+            value={`$${metrics.revenue.toLocaleString()}`}
+            change="+0.001%"
+            icon={<TrendingUp />}
+            positive
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        </AnimatedMetricCard>
+        <AnimatedMetricCard index={1}>
+          <MetricCard
+            title="Users"
+            value={metrics.users.toLocaleString()}
+            change="+0.01%"
+            icon={<Users />}
+            positive
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+        </AnimatedMetricCard>
+        <AnimatedMetricCard index={2}>
+          <MetricCard
+            title="Conversions"
+            value={metrics.conversions.toLocaleString()}
+            change="+0.1%"
+            icon={<BarChart3 />}
+            positive
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </AnimatedMetricCard>
+        <AnimatedMetricCard index={3}>
+          <MetricCard
+            title="Growth"
+            value={`${metrics.growth.toFixed(1)}%`}
+            change="+0.003%"
+            icon={<Activity />}
+            positive
+          />
+        </AnimatedMetricCard>
+      </div>
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <AnimatedChartCard index={0}>
+          <ChartCard title="Monthly Visitors" type="line" data={visitorsData} />
+        </AnimatedChartCard>
+        <AnimatedChartCard index={1}>
+          <ChartCard title="Campaign Conversion Rate" type="bar" data={campaignData} />
+        </AnimatedChartCard>
+        <AnimatedChartCard index={2}>
+          <ChartCard title="User Role Distribution" type="pie" data={userRoleData} />
+        </AnimatedChartCard>
+      </div>
+
+      {/* Table */}
+      <DataTable />
+    </main>
   );
 }
