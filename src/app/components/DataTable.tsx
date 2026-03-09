@@ -87,7 +87,7 @@ export default function DataTable() {
     link.setAttribute('download', 'users.csv');
     link.click();
 
-      toast.success("CSV exported successfully!"); // ✅
+      toast.success("CSV exported successfully!");
   };
 
   const exportPDF = () => {
@@ -109,7 +109,7 @@ export default function DataTable() {
 
     doc.save('users.pdf');
 
-      toast.success("PDF exported successfully!"); // ✅
+      toast.success("PDF exported successfully!");
   };
 
 
@@ -135,7 +135,7 @@ export default function DataTable() {
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [isLive]); // re-run only when `isLive` changes
+  }, [isLive]);
 
 
 
@@ -143,7 +143,6 @@ export default function DataTable() {
   return (
     <div className="mt-8 bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-6 rounded-xl shadow-md overflow-x-auto">
       <div className="flex justify-between items-center mb-4">
-        {/* 👈 Left: Live Toggle Button */}
         <button
           onClick={() => setIsLive((prev) => !prev)}
           className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
@@ -151,7 +150,6 @@ export default function DataTable() {
           {isLive ? '🛑 Stop Live Table' : '▶️ Start Live'}
         </button>
 
-        {/* 👉 Right: Export Buttons */}
         <div className="flex gap-2">
           <button
             onClick={exportCSV}

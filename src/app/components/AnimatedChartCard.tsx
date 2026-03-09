@@ -26,7 +26,7 @@ export default function AnimatedChartCard({ children }: AnimatedChartCardProps) 
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={fadeIn} // ✅ FIXED here
+      variants={fadeIn}
     >
       {children}
     </motion.div>

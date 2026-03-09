@@ -61,8 +61,19 @@ You added several advanced features during development:
 | 8. | CSV and PDF export failed | Properly integrated `papaparse` and `jspdf-autotable` libraries |
 
 ---
- 
- 
+
+## 📸 Screenshots
+
+### Dashboard Overview
+![Dashboard Overview](./public/Screenshot%202026-03-10%20011543.png)
+
+### Dashboard with Charts
+![Dashboard with Charts](./public/Screenshot%202026-03-10%20011656.png)
+
+### Data Table & Export Features
+![Data Table & Export Features](./public/Screenshot%202026-03-10%20011757.png)
+
+---
 
 ## 🔗 Live Demo
 

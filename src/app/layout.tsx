@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import Sidebar from '@/app/components/Sidebar';
 import Topbar from '@/app/components/Topbar';
 import ThemeToggle from '@/app/components/ThemeToggle';
-import { Toaster } from 'sonner'; // ✅ Add this
+import { Toaster } from 'sonner';  
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,10 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Sidebar />
         <div className="flex-1 flex flex-col relative">
           <Topbar />
-          <ThemeToggle /> {/* Floating button in top-right corner */}
+          <ThemeToggle />
           <main className="p-6">{children}</main>
         </div>
-        <Toaster position="top-right" richColors /> {/* ✅ Add this line at bottom of body */}
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

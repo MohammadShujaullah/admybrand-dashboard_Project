@@ -61,7 +61,6 @@ export default function Home() {
 
   return (
     <main className="p-6 space-y-8">
-      {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <AnimatedMetricCard index={0}>
           <MetricCard
@@ -101,7 +100,6 @@ export default function Home() {
         </AnimatedMetricCard>
       </div>
 
-      {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <AnimatedChartCard index={0}>
           <ChartCard title="Monthly Visitors" type="line" data={visitorsData} />
@@ -114,7 +112,6 @@ export default function Home() {
         </AnimatedChartCard>
       </div>
 
-      {/* Table */}
       <DataTable />
     </main>
   );
